@@ -5,7 +5,7 @@ on:
     branches: [main, master]
 
 env:
-  Project_Path: '**/HBD.Framework.sln'
+  Project_Path: '**/HBDStack.Framework.sln'
   Enable_Release: true
   Enable_Nuget_Release: true
 
