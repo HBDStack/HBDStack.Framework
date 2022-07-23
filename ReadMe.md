@@ -1,5 +1,5 @@
 [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://opensource.org/licenses/MIT)
-[![NuGet](https://img.shields.io/nuget/v/HBDStack.Framework.Extensions.svg?maxAge=2592000)](https://www.nuget.org/packages/HBDStack.Framework/)
+[![NuGet](https://img.shields.io/nuget/v/HBDStack.Framework.Extensions.svg?maxAge=2592000)](https://www.nuget.org/packages/HBDStack.Framework.Extensions)
 
 ##### Nuget Package:
 >PM> *Install-Package HBDStack.Framework.Extensions*
