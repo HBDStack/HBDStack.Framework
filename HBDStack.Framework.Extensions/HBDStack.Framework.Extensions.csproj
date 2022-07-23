@@ -4,38 +4,17 @@
     <TargetFramework>net6.0</TargetFramework>
     <Authors>Duy Hoang</Authors>
     <Company>drunkcoding</Company>
-    <Copyright>@2022 drunkcoding</Copyright>
+    <Copyright>@2025 drunkcoding</Copyright>
     <PackageLicense>https://opensource.org/licenses/MIT</PackageLicense>
-    <PackageProjectUrl>https://github.com/baoduy/HBD.Framework</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/baoduy/HBD.Framework</RepositoryUrl>
-    <RepositoryType>github</RepositoryType>
-    <PackageTags>Framework, Adapters, Extensions</PackageTags>
-    <PackageReleaseNotes>
-      Version 3.x
-      - Remove supports .Net 4 and Added supports .Net Core 3.x
-      - Added Expression extentions.
-      - Added Expression extentions.
-      Version 1.x
-      - Add User Extensions.
-      - Add GetEnumInfo
-      - Add Words Singularize and Pluralize
-      - Added IType Extractor from HBD.EntityFramework.Core
-      - Splitted from HBD.Frameworks
-    </PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/baoduy/HBDStack.Framework</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/baoduy/HBDStack.Framework</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Extensions</PackageTags>
+    <PackageReleaseNotes></PackageReleaseNotes>
     <LangVersion>default</LangVersion>
-    <Description>
-      The extensions methods for .Net developments.
-      - Attribute extensions
-      - Collection extensions
-      - Property extensions
-      - String extensions
-      - Type extensions
-      - DateTime exntensions
-      - Enum extensions
-      - Expression extensions
-    </Description>
+    <Description></Description>
     <NeutralLanguage>en</NeutralLanguage>
-    <PackageVersion>5.0.1</PackageVersion>
+    <PackageVersion></PackageVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>NugetLogo.png</PackageIcon>
     <Nullable>warnings</Nullable>
