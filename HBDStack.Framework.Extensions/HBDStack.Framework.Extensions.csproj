@@ -6,8 +6,8 @@
     <Company>drunkcoding</Company>
     <Copyright>@2025 drunkcoding</Copyright>
     <PackageLicense>https://opensource.org/licenses/MIT</PackageLicense>
-    <PackageProjectUrl>https://github.com/baoduy/HBDStack.Framework</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/baoduy/HBDStack.Framework</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/HBDStack/HBDStack.Framework</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/HBDStack/HBDStack.Framework</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Extensions</PackageTags>
     <PackageReleaseNotes></PackageReleaseNotes>
