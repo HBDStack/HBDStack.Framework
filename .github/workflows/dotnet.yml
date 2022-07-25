@@ -8,8 +8,8 @@ on:
 env:
   Project_Path: 'HBDStack.Framework.sln'
   Is_Main_Branch: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
-  Enable_Release: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
-  Enable_Nuget_Release: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+  Enable_Release: false
+  Enable_Nuget_Release: false
 
 jobs:
   build:
@@ -52,13 +52,15 @@ jobs:
           current_version: ${{ steps.versioning.outputs.semver }}
           level: patch
 
-      - name: Print Version
-        if: ${{ env.Is_Main_Branch }}
+      - name: Print Vairables
         run: |
           echo "Tag: ${{ steps.versioning.outputs.tag }}"
           echo "Semver: ${{ steps.versioning.outputs.semver }}"
           echo "Version code: ${{ steps.versioning.outputs.versionCode }}"
           echo "New version: ${{ steps.bump-semver.outputs.new_version }}"
+          echo "Is Main Branch: ${{ env.Is_Main_Branch }}"
+          echo "Is Enable_Release: ${{ env.Enable_Release }}"
+          echo "Is Enable_Nuget_Release: ${{ env.Enable_Nuget_Release }}"
 
       #- name: Environment Printer
       #  uses: managedkaos/print-env@v1.0
