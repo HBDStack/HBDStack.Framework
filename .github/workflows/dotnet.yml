@@ -7,8 +7,8 @@ on:
 
 env:
   Project_Path: 'HBDStack.Framework.sln'
-  Enable_Release: false
-  Enable_Nuget_Release: false
+  Enable_Release: ${{ github.ref == 'refs/heads/main' }}
+  Enable_Nuget_Release: ${{ github.ref  == 'refs/heads/main'}}
 
 jobs:
   build:
