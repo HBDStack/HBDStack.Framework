@@ -64,11 +64,12 @@ jobs:
       #- name: Environment Printer
       #  uses: managedkaos/print-env@v1.0
 
-      # Package
+      # Ensure the project able to Package
       - name: Package
-        if: ${{ env.Enable_Release == 'true'  }}
         run: dotnet pack ${{ env.Project_Path }} --no-build --no-restore --configuration Release --output ${{ runner.WORKSPACE }}/nupkgs -p:PackageVersion=${{ steps.bump-semver.outputs.new_version }}
-      
+      - name: List Package
+        run: ls ${{ env.Project_Path }}
+          
       - name: Zip Release
         if: ${{ env.Enable_Release == 'true' }}
         uses: TheDoctor0/zip-release@0.6.2
