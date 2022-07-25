@@ -8,8 +8,8 @@ on:
 env:
   Project_Path: 'HBDStack.Framework.sln'
   Is_Main_Branch: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
-  Enable_Release: ${{ env.Is_Main_Branch }}
-  Enable_Nuget_Release: ${{ env.Is_Main_Branch }}
+  Enable_Release: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+  Enable_Nuget_Release: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
 
 jobs:
   build:
