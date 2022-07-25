@@ -7,8 +7,8 @@ on:
 
 env:
   Project_Path: 'HBDStack.Framework.sln'
-  Enable_Release: false
-  Enable_Nuget_Release: false
+  Enable_Release: ${{ false }}
+  Enable_Nuget_Release: ${{ false }}
 
 jobs:
   build:
@@ -70,7 +70,7 @@ jobs:
         run: dotnet pack ${{ env.Project_Path }} --no-build --no-restore --configuration Release --output ${{ runner.WORKSPACE }}/nupkgs -p:PackageVersion=${{ steps.bump-semver.outputs.new_version }}
       
       - name: Zip Release
-        if: ${{ env.Is_Main_Branch }}
+        if: ${{ env.Enable_Release  }}
         uses: TheDoctor0/zip-release@0.6.2
         with:
           # Filename for archive
