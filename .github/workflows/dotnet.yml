@@ -33,25 +33,23 @@ jobs:
       - name: Build
         run: dotnet build ${{ env.Project_Path }} --no-restore --configuration Release
       - name: Test
+        if: ${{ env.Enable_Release != 'true' }}
         run: dotnet test ${{ env.Project_Path }} --verbosity normal
-        continue-on-error: true
 
       # Versioning
       - name: Get version and version code
-        if: ${{ env.Enable_Release == 'true' }}
         uses: xom9ikk/version-by-tag@v1
         id: versioning
         with:
           isUseGithubRunNumber: true
 
       - uses: actions-ecosystem/action-bump-semver@v1
-        if: ${{ env.Enable_Release == 'true' }}
         id: bump-semver
         with:
           current_version: ${{ steps.versioning.outputs.semver }}
           level: patch
 
-      - name: Print Vairables
+      - name: Print Variables
         run: |
           echo "Tag: ${{ steps.versioning.outputs.tag }}"
           echo "Semver: ${{ steps.versioning.outputs.semver }}"
