@@ -66,7 +66,7 @@ jobs:
       - name: Package
         run: dotnet pack ${{ env.Project_Path }} --no-build --no-restore --configuration Release --output ${{ runner.WORKSPACE }}/nupkgs -p:PackageVersion=${{ steps.bump-semver.outputs.new_version }}
       - name: List Package
-        run: ls ${{ env.Project_Path }}
+        run: ls ${{ runner.WORKSPACE }}/nupkgs
           
       - name: Zip Release
         if: ${{ env.Enable_Release == 'true' }}
@@ -74,8 +74,6 @@ jobs:
         with:
           # Filename for archive
           filename: release.zip
-          # Base path for archive files
-          # path: ${{ runner.WORKSPACE }}/nupkgs
           directory: ${{ runner.WORKSPACE }}/nupkgs
 
       # Push nuget packages to Github Repository
