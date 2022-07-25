@@ -7,8 +7,8 @@ on:
 
 env:
   Project_Path: 'HBDStack.Framework.sln'
-  Enable_Release: ${{ false }}
-  Enable_Nuget_Release: ${{ false }}
+  Enable_Release: false
+  Enable_Nuget_Release: false
 
 jobs:
   build:
@@ -38,14 +38,14 @@ jobs:
 
       # Versioning
       - name: Get version and version code
-        if: ${{ env.Enable_Release }}
+        if: ${{ env.Enable_Release == 'true' }}
         uses: xom9ikk/version-by-tag@v1
         id: versioning
         with:
           isUseGithubRunNumber: true
 
       - uses: actions-ecosystem/action-bump-semver@v1
-        if: ${{ env.Enable_Release }}
+        if: ${{ env.Enable_Release == 'true' }}
         id: bump-semver
         with:
           current_version: ${{ steps.versioning.outputs.semver }}
@@ -66,11 +66,11 @@ jobs:
 
       # Package
       - name: Package
-        if: ${{ env.Enable_Release }}
+        if: ${{ env.Enable_Release == 'true'  }}
         run: dotnet pack ${{ env.Project_Path }} --no-build --no-restore --configuration Release --output ${{ runner.WORKSPACE }}/nupkgs -p:PackageVersion=${{ steps.bump-semver.outputs.new_version }}
       
       - name: Zip Release
-        if: ${{ env.Enable_Release  }}
+        if: ${{ env.Enable_Release == 'true' }}
         uses: TheDoctor0/zip-release@0.6.2
         with:
           # Filename for archive
@@ -81,13 +81,13 @@ jobs:
 
       # Push nuget packages to Github Repository
       - name: Publish
-        if: ${{ env.Enable_Release }}
+        if: ${{ env.Enable_Release == 'true' }}
         run: dotnet nuget push ${{ runner.WORKSPACE }}/nupkgs/*.nupkg --skip-duplicate --source github --api-key ${{ secrets.PACKAGE_TOKEN }}
 
       # Create Release
       - name: Create Release
         id: create_release
-        if: ${{ env.Enable_Release }}
+        if: ${{ env.Enable_Release == 'true' }}
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
@@ -98,7 +98,7 @@ jobs:
           prerelease: false
       - name: Upload Release Asset
         id: upload-release-asset
-        if: ${{ env.Enable_Release }}
+        if: ${{ env.Enable_Release == 'true' }}
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -110,5 +110,5 @@ jobs:
 
       # Publish to NUGET.ORG
       - name: Publish Nuget
-        if: ${{ env.Enable_Nuget_Release }}
+        if: ${{ env.Enable_Nuget_Release == 'true' }}
         run: dotnet nuget push ${{ runner.WORKSPACE }}/nupkgs/*.nupkg --skip-duplicate --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_PACKAGE_TOKEN }}
