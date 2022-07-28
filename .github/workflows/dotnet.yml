@@ -12,7 +12,7 @@ env:
 
 jobs:
   reusable_workflow_job:
-    uses: HBDStack/ShareWorkflows/.github/workflows/dotnet-package-release.yml@main
+    uses: ShareWorkflows/.github/workflows/dotnet-package-release.yml@main
     with:
       Project_Path: ${{ env.Project_Path }}
       Enable_Release: ${{ env.Enable_Release }}
