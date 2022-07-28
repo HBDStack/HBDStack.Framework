@@ -5,15 +5,10 @@ on:
     branches:
       - '**'
 
-env:
-  Project_Path: 'HBDStack.Framework.sln'
-  Enable_Release: ${{ github.ref == 'refs/heads/main' }}
-  Enable_Nuget_Release: ${{ github.ref  == 'refs/heads/main'}}
-
 jobs:
   reusable_workflow_job:
     uses: HBDStack/ShareWorkflows/.github/workflows/dotnet-package-release.yml@main
     with:
-      Project_Path: ${{ env.Project_Path }}
-      Enable_Release: ${{ env.Enable_Release }}
-      Enable_Nuget_Release: ${{ env.Enable_Nuget_Release }}
+      Project_Path: 'HBDStack.Framework.sln'
+      Enable_Release: ${{ github.ref == 'refs/heads/main' }}
+      Enable_Nuget_Release: ${{ github.ref  == 'refs/heads/main'}}
