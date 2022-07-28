@@ -6,7 +6,7 @@ on:
       - '**'
 
 jobs:
-  reusable_workflow_job:
+  dotnet_pack_release_job:
     uses: HBDStack/ShareWorkflows/.github/workflows/dotnet-package-release.yml@main
     with:
       Project_Path: 'HBDStack.Framework.sln'
