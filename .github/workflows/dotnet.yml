@@ -12,10 +12,8 @@ env:
 
 jobs:
   reusable_workflow_job:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: HBDStack/ShareWorkflows/.github/workflows/dotnet-package-release.yml@main
-        with:
-          Project_Path: ${{ env.Project_Path }}
-          Enable_Release: ${{ env.Enable_Release }}
-          Enable_Nuget_Release: ${{ env.Enable_Nuget_Release }}
+    uses: HBDStack/ShareWorkflows/.github/workflows/dotnet-package-release.yml@main
+    with:
+      Project_Path: ${{ env.Project_Path }}
+      Enable_Release: ${{ env.Enable_Release }}
+      Enable_Nuget_Release: ${{ env.Enable_Nuget_Release }}
