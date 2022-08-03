@@ -1,10 +1,17 @@
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace HBDStack.Framework.Extensions.Encryption;
 
 public static class StringEncryption
 {
+    public static bool IsEncrypted(this string @this)
+    {
+        var regex = new Regex("^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$");
+        return regex.IsMatch(@this);
+    }
+    
     private static void ValidateKey(string keyString)
     {
         if (keyString.Length != 32) throw new ArgumentException($"The lenght of {nameof(keyString)} must be 32");

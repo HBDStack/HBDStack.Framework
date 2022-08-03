@@ -16,7 +16,8 @@ public class StringEncryptionTests
         var s = "Steven Hoang";
         var e = s.EncryptWith(Key);
         e.Should().NotBe(s);
-
+        e.IsEncrypted().Should().BeTrue();
+        
         var a = () => e.DecryptWith("03d!C3h^Z#XH52Ek8E?sNFcEEAP2z.?}");
         a.Should().Throw<CryptographicException>();
 

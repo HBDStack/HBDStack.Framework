@@ -292,3 +292,5 @@ __pycache__/
 # MAC
 .DS_Store
 **/._*
+**/bin
+**/*.dll

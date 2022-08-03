@@ -215,10 +215,4 @@ public static partial class StringExtensions
     //     //return builder.ToString();
     //     return Reg.Replace(@this, "$1 ");
     // }
-
-    private static bool IsEncryptedWithBase64(this string @this)
-    {
-        var regex = new Regex("^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$");
-        return regex.IsMatch(@this);
-    }
 }
