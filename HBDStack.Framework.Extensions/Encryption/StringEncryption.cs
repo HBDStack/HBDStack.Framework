@@ -9,6 +9,10 @@ public static class StringEncryption
 {
     public static bool IsEncrypted(this string @this)
     {
+        if (string.IsNullOrWhiteSpace(@this)) return false;
+        if (bool.FalseString.Equals(@this, StringComparison.CurrentCultureIgnoreCase)) return false;
+        if (bool.TrueString.Equals(@this, StringComparison.CurrentCultureIgnoreCase)) return false;
+        
         var regex = new Regex("^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$");
         return regex.IsMatch(@this);
     }
