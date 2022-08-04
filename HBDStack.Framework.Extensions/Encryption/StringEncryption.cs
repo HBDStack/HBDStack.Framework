@@ -1,6 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Text.Unicode;
 
 namespace HBDStack.Framework.Extensions.Encryption;
 
@@ -11,13 +12,25 @@ public static class StringEncryption
         var regex = new Regex("^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$");
         return regex.IsMatch(@this);
     }
+
+    public static string EncryptWithBase64(this string plainText)
+    {
+        var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
+        return Convert.ToBase64String(plainTextBytes);
+    }
+    
+    public static string DecryptWithBase64(this string encryptedText)
+    {
+        var base64EncodedBytes = Convert.FromBase64String(encryptedText);
+        return Encoding.UTF8.GetString(base64EncodedBytes);
+    }
     
     private static void ValidateKey(string keyString)
     {
         if (keyString.Length != 32) throw new ArgumentException($"The lenght of {nameof(keyString)} must be 32");
     }
 
-    public static string EncryptWith(this string planText, string keyString)
+    public static string EncryptWith(this string plainText, string keyString)
     {
         ValidateKey(keyString);
         var key = Encoding.UTF8.GetBytes(keyString);
@@ -27,7 +40,7 @@ public static class StringEncryption
         using var msEncrypt = new MemoryStream();
         using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
         using (var swEncrypt = new StreamWriter(csEncrypt))
-            swEncrypt.Write(planText);
+            swEncrypt.Write(plainText);
 
         var iv = aesAlg.IV;
         var decryptedContent = msEncrypt.ToArray();

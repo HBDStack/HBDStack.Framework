@@ -11,7 +11,7 @@ public class StringEncryptionTests
     private const string Key = "8!DQQx@5.~#j_JM>ri.vAF2A.*q_.zYx";
 
     [TestMethod]
-    public void ExtractProperties_Test()
+    public void EncryptWithPassword_Test()
     {
         var s = "Steven Hoang";
         var e = s.EncryptWith(Key);
@@ -22,5 +22,16 @@ public class StringEncryptionTests
         a.Should().Throw<CryptographicException>();
 
         e.DecryptWith(Key).Should().Be(s);
+    }
+    
+    [TestMethod]
+    public void EncryptWithBase64_Test()
+    {
+        var s = "Steven Hoang";
+        var e = s.EncryptWithBase64();
+        e.Should().NotBe(s);
+        e.IsEncrypted().Should().BeTrue();
+
+        e.DecryptWithBase64().Should().Be(s);
     }
 }
