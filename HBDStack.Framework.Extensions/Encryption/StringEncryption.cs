@@ -7,11 +7,15 @@ namespace HBDStack.Framework.Extensions.Encryption;
 
 public static class StringEncryption
 {
+    private static string[] Ignored = { "None" };
+
     public static bool IsEncrypted(this string @this)
     {
-        if (string.IsNullOrWhiteSpace(@this)) return false;
+        if (string.IsNullOrWhiteSpace(@this) || @this.Length < 4) return false;
         if (bool.FalseString.Equals(@this, StringComparison.CurrentCultureIgnoreCase)) return false;
         if (bool.TrueString.Equals(@this, StringComparison.CurrentCultureIgnoreCase)) return false;
+        if (@this.IsNumber()) return false;
+        if (Ignored.Any(s => @this.Contains(s, StringComparison.CurrentCultureIgnoreCase))) return false;
 
         var buffer = new Span<byte>(new byte[@this.Length]);
         return Convert.TryFromBase64String(@this, buffer, out _);
@@ -49,7 +53,7 @@ public static class StringEncryption
         var aes = Aes.Create();
         aes.Key = k;
         aes.IV = iv;
-        
+
         return aes;
     }
 

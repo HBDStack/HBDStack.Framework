@@ -23,13 +23,18 @@ public class StringEncryptionTests
     [TestMethod]
     public void IsEncryptBase64_Test()
     {
+        "8080".IsEncrypted().Should().BeFalse();
         "Duy".IsEncrypted().Should().BeFalse();
+        "Error".IsEncrypted().Should().BeFalse();
+        "Information".IsEncrypted().Should().BeFalse();
+        "None".IsEncrypted().Should().BeFalse();
         
         bool.FalseString.ToLower().IsEncrypted().Should().BeFalse();
         bool.TrueString.ToLower().IsEncrypted().Should().BeFalse();
         string.Empty.IsEncrypted().Should().BeFalse();
 
         "U3RldmVuIEhvYW5n".IsEncrypted().Should().BeTrue();
+        "Lg==".IsEncrypted().Should().BeTrue();
     }
 
     [TestMethod]
