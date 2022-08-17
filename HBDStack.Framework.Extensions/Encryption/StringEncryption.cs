@@ -7,20 +7,21 @@ namespace HBDStack.Framework.Extensions.Encryption;
 
 public static class StringEncryption
 {
-    private static string[] Ignored = { "None" };
-
-    public static bool IsEncrypted(this string @this)
+    private static readonly string[] Ignored = { "None" };
+    
+    public static bool IsEncrypted(this string value)
     {
-        if (string.IsNullOrWhiteSpace(@this) || @this.Length < 4) return false;
-        if (bool.FalseString.Equals(@this, StringComparison.CurrentCultureIgnoreCase)) return false;
-        if (bool.TrueString.Equals(@this, StringComparison.CurrentCultureIgnoreCase)) return false;
-        if (@this.IsNumber()) return false;
-        if (Ignored.Any(s => @this.Contains(s, StringComparison.CurrentCultureIgnoreCase))) return false;
+        if (bool.FalseString.Equals(value, StringComparison.CurrentCultureIgnoreCase)) return false;
+        if (bool.TrueString.Equals(value, StringComparison.CurrentCultureIgnoreCase)) return false;
+        if (value.IsNumber()) return false;
+        if (Ignored.Any(s => value.Contains(s, StringComparison.CurrentCultureIgnoreCase))) return false;
+        
+        var rx = new Regex(@"^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$", RegexOptions.Compiled);
+        if (value.Length % 4 != 0 || !rx.IsMatch(value)) return false;
 
-        var buffer = new Span<byte>(new byte[@this.Length]);
-        return Convert.TryFromBase64String(@this, buffer, out _);
-        // var regex = new Regex("^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$");
-        // return regex.IsMatch(@this);
+        return true;
+        // var rs = value.DecryptWithBase64();
+        // return rs.All(c => c != 65533);
     }
 
     public static string EncryptWithBase64(this string plainText) =>

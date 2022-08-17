@@ -28,6 +28,7 @@ public class StringEncryptionTests
         "Error".IsEncrypted().Should().BeFalse();
         "Information".IsEncrypted().Should().BeFalse();
         "None".IsEncrypted().Should().BeFalse();
+        "udfclientdev".IsEncrypted().Should().BeFalse();
         
         bool.FalseString.ToLower().IsEncrypted().Should().BeFalse();
         bool.TrueString.ToLower().IsEncrypted().Should().BeFalse();
