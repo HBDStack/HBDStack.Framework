@@ -7,21 +7,18 @@ namespace HBDStack.Framework.Extensions.Encryption;
 
 public static class StringEncryption
 {
-    private static readonly string[] Ignored = { "None" };
-    
     public static bool IsEncrypted(this string value)
     {
+        if (value.Length <= 4) return false;
         if (bool.FalseString.Equals(value, StringComparison.CurrentCultureIgnoreCase)) return false;
         if (bool.TrueString.Equals(value, StringComparison.CurrentCultureIgnoreCase)) return false;
         if (value.IsNumber()) return false;
-        if (Ignored.Any(s => value.Contains(s, StringComparison.CurrentCultureIgnoreCase))) return false;
         
-        var rx = new Regex(@"^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$", RegexOptions.Compiled);
-        if (value.Length % 4 != 0 || !rx.IsMatch(value)) return false;
+        //var rx = new Regex(@"^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$", RegexOptions.Compiled);
+        //if (value.Length % 4 != 0 || !rx.IsMatch(value)) return false;
 
-        return true;
-        // var rs = value.DecryptWithBase64();
-        // return rs.All(c => c != 65533);
+        var buffer = new Span<byte>(new byte[value.Length]);
+        return Convert.TryFromBase64String(value, buffer , out _);
     }
 
     public static string EncryptWithBase64(this string plainText) =>

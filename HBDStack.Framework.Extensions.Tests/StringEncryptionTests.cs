@@ -35,7 +35,7 @@ public class StringEncryptionTests
         string.Empty.IsEncrypted().Should().BeFalse();
 
         "U3RldmVuIEhvYW5n".IsEncrypted().Should().BeTrue();
-        "Lg==".IsEncrypted().Should().BeTrue();
+        "QmFvIER1eQ==".IsEncrypted().Should().BeTrue();
     }
 
     [TestMethod]
