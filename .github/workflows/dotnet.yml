@@ -21,3 +21,5 @@ jobs:
     with:
       Project_Path: 'HBDStack.Framework.sln'
       Project_Name: 'HBDStack.Framework'
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
