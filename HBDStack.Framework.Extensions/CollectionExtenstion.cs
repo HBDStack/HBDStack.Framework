@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace HBDStack.Framework.Extensions;
+// ReSharper disable once CheckNamespace
+namespace System.Collections.Generic;
 
 public static class CollectionExtenstion
 {
